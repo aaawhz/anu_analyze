@@ -35,6 +35,7 @@ export function returnFalse() {
 export function returnTrue() {
     return true;
 }
+
 export let __type = Object.prototype.toString;
 
 /**
@@ -129,6 +130,8 @@ export function typeNumber(data) {
         return 0;
     }
     var a = numberMap[__type.call(data)];
+
+    //如果是 [object Object] 就返回 8
     return a || 8;
 }
 
