@@ -1,0 +1,5 @@
+/nbproject/private/
+/node_modules/*
+/md/*
+/coverage/
+node_modules/

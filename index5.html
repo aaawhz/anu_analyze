@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+  <script type='text/javascript' src="./dist/React.js"></script>
+  <!-- <script type='text/javascript' src="./lib/devtools.js"></script>-->
+  <!-- <script type='text/javascript' src="./test/react.development.js"></script>
+  <script type='text/javascript' src="./test/react-dom.development.js"></script>-->
+  <!--<script src="./react.js"></script>
+  <script src="./react-dom.js"></script>-->
+    <script type='text/javascript' src="./lib/babel.js"></script>
+    <style>
+        .wrapper{
+            height:200px;
+            width:200px;
+            overflow: scroll;
+        }
+        .inner{
+            height:500px;
+            width:200px;
+            background: magenta;
+        }
+    </style>
+</head>
+
+<body>
+    <div>开发者工具</div>
+    <pre>
+          
+  </pre>
+    <div id='example'></div>
+    <script type='text/babel'>
+   
+   var container = document.getElementById("example");
+   var div = container;
+ //  var PropTypes = React.PropTypes 
+   if (!window.ReactDOM) {
+       window.ReactDOM = window.React;
+   }
+
+
+       function C(){
+           return <p>xxx</p>
+       }
+ 
+        class App extends React.PureComponent {
+            constructor(props) {
+                super(props);
+                this.state = {
+                    time: 555
+                };
+            }
+
+            onscroll(e) {
+                this.setState({
+                    time: e.timeStamp
+                })
+            }
+            render() {
+                return <div className="app">{ (props) =>  <p>这是函数</p> }</div>
+            }
+        }
+
+
+        ReactDOM.render(<App/>, container);
+
+</script>
+
+</body>
+
+</html>

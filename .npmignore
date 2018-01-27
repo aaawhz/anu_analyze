@@ -1,0 +1,15 @@
+/nbproject/private/
+/node_modules/*
+/md/*
+/coverage/
+/test/*
+/benchmarks/*
+package-lock.json
+node_modules/
+index*.html
+version.md
+karma.conf.js
+chromedriver
+selenium-server-*
+/.vscode/*
+/.history/*

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+</head>
+
+<body>
+
+  <script>
+  function quickSort(arr, low, high) {
+    low = low == null ? 0 : low;
+    high = high == null ? arr.length-1: high;
+    if (low < high) {
+        var l = low,
+            h = high,
+            key = arr[l];
+        while (l < h) {
+            while (l < h && arr[h] > key) {
+                h--;
+            }
+            if (l < h) {
+                arr[l++] = arr[h];
+            }
+            while (l < h && arr[l] < key) {
+                l++;
+            }
+            if (l < h) {
+                arr[h--] = arr[l];
+            }
+        }
+        arr[l] = key;
+        quickSort(arr, low, l - 1);
+        quickSort(arr, l + 1, high);
+    }
+}
+var arr =[4,51,7,3,9,1,0,33];
+quickSort(arr)
+console.log(arr)
+  </script>
+
+</body>
+
+</html>

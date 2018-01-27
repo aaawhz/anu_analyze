@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type='text/javascript' src="./dist/React.js"></script>
+    <!--<script type='text/javascript' src="./lib/ReactTestUtils.js"></script>-->
+
+    <script type='text/javascript' src="./lib/babel.js"></script>
+    <script type="text/babel">
+
+      </script>
+</head>
+
+<body>
+
+    <pre>应该等于
+           
+          
+        </pre>
+    <h1 id='example' class="root">
+
+    </h1>
+    <script type='text/babel'>
+           var container = document.getElementById("example")
+           var div = container
+            var PropTypes = React.PropTypes
+            if(!window.ReactDOM){
+              window.ReactDOM = React
+            }
+            var expect = function(a) {
+                return {
+                    toBe: function(b) {
+                        console.log(a,"vs", b, a === b)
+                    },
+                    toEqual(b){
+                        console.log(a,"vs", b, a +""=== b+"")
+                    },
+                }
+            }  
+        var body = document.body;
+        var container = document.createElement("div");
+        body.appendChild(container);
+      
+        
+        function getSuffix(str) {
+            var len = str.length, 
+                max = str.charCodeAt(0), 
+                min = max,
+                xbuckets = [],
+                sa = [],
+                rank = [];
+            // 字符串转charCode
+            for (let i = 0; i < len; i++) {
+                let c = str.charCodeAt(i);
+                rank[i] = c;
+                max = Math.max(max, c);
+                min = Math.min(min, c);
+            }
+            //压缩charCode值
+            rank.forEach(function(el, i){
+                rank[i] = {x: el - min + 1 };
+            });
+            var hasDuplicate = true, k = 0;
+            while(hasDuplicate){
+                //重置数据
+                hasDuplicate = false;
+                xbuckets.length = 0;
+                //倍增，目的是求关键字y
+                var d = 1 << k; k ++;
+        
+                rank.forEach(function(el, i){
+                    //根据关键字x，进行基数排序，并同时计算关键字y
+                    el.y = rank[i+ d] ? rank[i+ d].x: 0;
+                   
+                    var index = el.x;
+                    if(!xbuckets[index]){
+                        xbuckets[index] = [el];
+                    }else{
+                        xbuckets[index].push(el);
+                    }
+                });
+        
+                var newIndex = 1, last = {};
+                xbuckets.forEach(function(bucket){
+                    if(bucket){
+                        //使用计数排序对每个桶再进行排序
+                        var cache = {};
+                        var yxbuckets = [];
+                        bucket.forEach(function(el){
+                            var index = el.y;
+                            if(!yxbuckets[index]){
+                                yxbuckets[index] = [el];
+                            }else{
+                                yxbuckets[index].push(el);
+                            }
+                        });
+                        var j = 0;
+                        yxbuckets.forEach(function(ybucket){
+                            if(ybucket){
+                                ybucket.forEach(function(el){
+                                    if(el.y !== last.y){
+                                        el.x = newIndex++;
+                                        cache[el.y] = el.x;
+                                    }else{
+                                        hasDuplicate = true;
+                                        el.x = cache[el.y];
+                                    }
+                                    bucket[j++] = el; //这里可以不要
+                                    last = el;
+                                });
+                            }
+                        });
+                    }
+                });
+             
+            }
+            //rank是从1开始的，因此这里面要减1
+            rank = rank.map(function(el, i ){
+                sa[el.x - 1] = i;
+                return el.x;
+            });
+            console.log("rank数组", rank);
+            console.log("后缀数组", sa);
+            return sa;
+        }
+        
+
+var a = getSuffix("aabaaaab"); 
+function getHeight(str, sa){
+    var n = str.length, k = 0, rank = [], height = []
+    for(var i = 1;i<=n;i++) {
+        rank[sa[i]]=i;
+    }
+    for(var i=0;i<n;i++){
+         if(k) k--;
+         var j=sa[rank[i]-1];
+         while(i+k < n && j+k<n &&r[i+k]==r[j+k]) {
+            k++;
+         }
+         height[rank[i]]=k;
+    }
+    return height
+}
+
+
+</script>
+3, 4, 5, 0, 6, 1, 7, 2 
+</body>
+
+</html>

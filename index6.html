@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <script type='text/javascript' src="./dist/React.js"></script>
+    <!--<script type='text/javascript' src="./react.development2.js"></script>
+    <script type='text/javascript' src="./react-dom.development2.js"></script>-->
+
+    <script src="lib/babel.js"></script>
+</head>
+
+<body>
+
+    <h1>测试</h1>
+    <h1 id='app-root' className="root">
+
+    </h1>
+    <script type='text/babel'>
+            var check = function () {
+                return null;
+            };
+            check.isRequired = check;
+            var PropTypes = React.PropTypes || {
+                string: check
+            }
+            if(!window.ReactDOM){
+              window.ReactDOM = React
+            }
+            var container = document.getElementById("app-root")
+
+            class Tree extends React.Component{
+                constructor(props){
+                    super(props)
+                    this.state = {}
+                }
+                renderTreeNode(child, index){
+                    var childProps = {}
+                    childProps.checkable = this.props.checkable
+                    console.log(this.props)
+                    return React.cloneElement(child, childProps);
+                }
+                render() {
+                    var props = this.props
+                    return React.createElement(
+                    'ul',
+                    {
+                        className: "root",
+                        role: 'tree-node',
+                        unselectable: 'on'
+                    },
+                    React.Children.map(props.children, this.renderTreeNode, this)
+                    );
+                };
+            }
+            class TreeNode extends React.Component{
+                 render(){
+                     return <li>{this.props.checkable}{this.props.children}</li>
+                 }
+            }
+          
+          var s =  ReactDOM.render(<Tree checkable={ <input className="checked" />}>
+            <TreeNode>1111</TreeNode>
+            <TreeNode>2222</TreeNode>
+            <TreeNode>3333</TreeNode>
+            </Tree>
+            , container);
+
+ 
+          </script>
+
+</body>
+
+</html>
